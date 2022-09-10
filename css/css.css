@@ -239,6 +239,9 @@ input:focus
 .w-50 {
 	width: 50%;
 }
+.w-45 {
+	width: 45%;
+}
 .w-40 {
 	width: 40%;
 }
@@ -328,4 +331,17 @@ input:focus
 .order_list {
 	background-color: cornflowerblue;
 	height: 300px;
+}
+
+.page a{
+	text-decoration: none;
+	color: white;
+}
+
+.nowPage {
+	font-size: 1.5rem;
+}
+
+.fs-12 {
+	font-size: 12px;
 }
