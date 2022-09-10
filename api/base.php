@@ -121,6 +121,7 @@ class DB
             $sql .= $arg[1];
         }
 
+        // echo $sql;
         return $this->pdo->query($sql)->fetchColumn();
     }
 }

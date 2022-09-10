@@ -1,11 +1,37 @@
 <div class="half" style="vertical-align:top;">
     <h1>預告片介紹</h1>
     <div class="rb tab" style="width:95%;">
-        <div id="abgne-block-20111227">
-            <ul class="lists">
-            </ul>
-            <ul class="controls">
-            </ul>
+        <div class="poster">
+            <div class="lists p-r d-f j-c" style="height: 70%;">
+            <?php
+            $posters = $Poster->all(['sh'=>1]);
+            foreach ($posters as $key => $poster) {
+            ?>
+                <div class="poster_item p-a" data-ani="<?=$poster['ani']?>">
+                    <img src="./img/<?=$poster['img']?>" alt="" width="220px">
+                    <div class="ct my-5"><?=$poster['name']?></div>
+                </div>
+            <?php
+            }
+            ?>
+            </div>
+            <div class="controls d-f a-c" style="height: 30%;">
+                <div class="preBtn cup" onclick="move('left')"></div>
+                <div class="controls_nav overh p-r d-f a-c">
+                    <div class="icons p-a d-f a-c">
+                    <?php
+                    foreach ($posters as $key => $poster) {
+                    ?>
+                    <div class="icon_item p-10 d-f a-c" onclick="ani(<?=$key?>)">
+                        <img src="./img/<?=$poster['img']?>" alt="" height="80px">
+                    </div>
+                    <?php
+                    }
+                    ?>
+                    </div>
+                </div>
+                <div class="nextBtn cup" onclick="move('right')"></div>
+            </div>
         </div>
     </div>
 </div>
@@ -14,7 +40,8 @@
     <div class="rb tab" style="width:95%;">
     <div class="d-f f-w">
         <?php
-        $num = $Movie->math('COUNT','id',['sh'=>1]);
+        $endDay = date("Y-m-d",strtotime("-2 days"));
+        $num = $Movie->math('COUNT','id'," WHERE `sh` = 1 AND `date` BETWEEN '$endDay' AND '$today' ");
         $pages = ceil($num/4);
         $page = ($_GET['page'])??1;
         if($page <= 0 || $page > $pages){
@@ -22,7 +49,7 @@
         }
         $start = ($page-1)*4;
         $limitSql = " LIMIT $start,4 ";
-        $movies = $Movie->all(['sh'=>1]," ORDER BY `rank` ".$limitSql);
+        $movies = $Movie->all(" WHERE `sh` = 1 AND `date` BETWEEN '$endDay' AND '$today' ORDER BY `rank` ".$limitSql);
         foreach ($movies as $key => $movie) {
             switch ($movie['type']) {
                 case 1:
@@ -85,3 +112,87 @@
         </div>
     </div>
 </div>
+
+<script>
+    $('.poster_item').eq(0).show();
+
+
+    let aniEvent = setInterval(()=>{
+        ani();
+    },3000);
+
+
+    function ani(num){
+        let now = $('.poster_item:visible');
+        let next ;
+
+        if(num == undefined){
+            if($(now).next().length == 0){
+                next = $('.poster_item').eq(0);
+            }else{
+                next = $(now).next();
+            }
+        }else{
+            next = $('.poster_item').eq(num);
+        }
+
+        let ani = $(next).data('ani');
+
+        switch (ani) {
+            case 1:
+                $(now).fadeOut(1500,()=>{
+                    $(next).fadeIn(1500);
+                })
+            break;
+
+            case 2:
+                $(now).slideUp(1500,()=>{
+                    $(next).slideDown(1500);
+                })
+            break;
+
+            case 3:
+                $(now).hide(1500,()=>{
+                    $(next).show(1500);
+                })
+            break;
+        
+        }
+    }
+
+    let page = 0;
+    function move(type){
+        let nowLeft = $('.icons').css('left').split('px')[0];
+        let num = <?=count($posters);?>;
+        let pages = num-4;
+        let move;
+
+        switch (type) {
+            case 'left':
+                if(page >= 0 && page < pages){
+                    page++;
+                    move = parseInt(nowLeft)-90;
+                }
+            break;
+            case 'right':
+                if(page > 0 ){
+                    page--;
+                    move = parseInt(nowLeft)+90;
+                }
+            break;
+        }
+
+        console.log('page',page);
+        console.log('pages',pages);
+        $('.icons').animate({left:move})
+    }
+
+
+    $('.icon_item').hover(function(){
+        clearInterval(aniEvent);
+    },function(){
+    aniEvent = setInterval(()=>{
+        ani();
+    },3000)
+    })
+</script>
