@@ -6,7 +6,7 @@ class DB
 {
     protected $table;
     protected $pdo;
-    protected $dsn = "mysql:host=localhost;charset=utf8;db15-0910";
+    protected $dsn = "mysql:host=localhost;charset=utf8;dbname=db15-0910";
 
     public function __construct($table)
     {
@@ -36,6 +36,7 @@ class DB
             $sql .= $arg[1];
         }
 
+        // echo $sql;
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
