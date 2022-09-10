@@ -321,8 +321,8 @@ input:focus
 }
 
 .movie_list {
-	background-color: cornflowerblue;
-	height: 300px;
+	/* background-color: cornflowerblue; */
+	height: 390px;
 }
 
 .order_list {

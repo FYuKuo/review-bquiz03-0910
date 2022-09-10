@@ -1,13 +1,13 @@
 <?php
 include('./base.php');
 $DB = new DB($_POST['table']);
-$now = $Poster->find($_POST['id']);
-$ch = $Poster->find($_POST['chId']);
+$now = $DB->find($_POST['id']);
+$ch = $DB->find($_POST['chId']);
 
 $tmp = $now['rank'];
 $now['rank'] = $ch['rank'];
 $ch['rank'] = $tmp;
 
-$Poster->save($now);
-$Poster->save($ch);
+$DB->save($now);
+$DB->save($ch);
 ?>
