@@ -36,7 +36,7 @@ include('./api/base.php');
             </marquee>
         </div>
 
-        <div id="mm">
+        <div id="mm" class="overa">
 
             <?php
             if(file_exists('./front/'.$do.'.php')){

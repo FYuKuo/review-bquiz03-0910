@@ -345,3 +345,34 @@ input:focus
 .fs-12 {
 	font-size: 12px;
 }
+
+.book_bg {
+	background-image: url(../icon/03D04.png);
+	background-repeat: no-repeat;
+	width: 540px;
+	height: 370px;
+	margin: 5px auto;
+}
+
+.sets_group {
+	/* background-color: rgb(201, 152, 152); */
+	width: 315px;
+	height: 345px;
+	padding-top: 17px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.set {
+	width: calc(315px / 5);
+	height: calc(345px / 4);
+	background-image: url(../icon/03D02.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.hasPeople {
+	background-image: url(../icon/03D03.png);
+}
