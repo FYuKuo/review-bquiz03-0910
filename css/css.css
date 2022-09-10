@@ -329,8 +329,8 @@ input:focus
 }
 
 .order_list {
-	background-color: cornflowerblue;
-	height: 300px;
+	/* background-color: cornflowerblue; */
+	height: 375px;
 }
 
 .page a{
