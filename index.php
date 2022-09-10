@@ -13,6 +13,7 @@ include('./api/base.php');
     <link rel="stylesheet" href="./css/css.css">
     <link href="./css/s2.css" rel="stylesheet" type="text/css">
     <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/js.js"></script>
 </head>
 
 <body>
@@ -28,7 +29,8 @@ include('./api/base.php');
             <a href="?do=login">管理系統</a>
         </div>
 
-        <div id="text"> <span class="ct">最新活動</span>
+        <div id="text"> 
+            <span class="ct">最新活動</span>
             <marquee direction="right">
                 ABC影城票價全面八折優惠1個月
             </marquee>
